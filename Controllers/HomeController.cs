@@ -12,15 +12,17 @@ namespace SharpenTheSaw.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly BowlingLeagueContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BowlingLeagueContext bl)
         {
             _logger = logger;
+            context = bl;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(context.Bowlers.ToList());
         }
 
         public IActionResult Privacy()
