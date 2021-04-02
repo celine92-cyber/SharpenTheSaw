@@ -52,6 +52,18 @@ namespace SharpenTheSaw
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute("bowlerteampagenum",
+                "BowlerTeam/{bowlerteamid}/{bowlertype}/pagenum",
+                   new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute("bowlerteamid",
+                    "BowlerTeam/{bowlerteamid}/{bowlerteam}",
+                    new {Controller = "Home", action = "Index"});
+
+                endpoints.MapControllerRoute("pagenum",
+                    "{pagenum}",
+                    new { Controller = "Home", action = "Index" }); 
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

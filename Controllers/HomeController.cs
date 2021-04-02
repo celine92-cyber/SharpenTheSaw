@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SharpenTheSaw.Models;
+using SharpenTheSaw.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,7 +14,7 @@ namespace SharpenTheSaw.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly BowlingLeagueContext context;
+        private BowlingLeagueContext context { get; set; }
 
         public HomeController(ILogger<HomeController> logger, BowlingLeagueContext bl)
         {
@@ -20,9 +22,32 @@ namespace SharpenTheSaw.Controllers
             context = bl;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(long? bowlerteamid, string bowlerteam, int pageNum = 0)
         {
-            return View(context.Bowlers.ToList());
+            int pageSize = 5;
+
+            return View(new IndexViewModel
+
+            {
+                Bowlers = (context.Bowlers
+                .Where(m => m.TeamId == bowlerteamid || bowlerteamid == null)
+                .OrderBy(m => m.BowlerFirstName)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize)
+                .ToList()),
+
+                PageNumberingInfo = new PageNumberingInfo
+                {
+                    NumItemsPerPage = pageSize,
+                    CurrentPage = pageNum,
+                    //if no bowler is selected, then get the full count. Otherwise, only count the number
+                    //from the bowler team that has been selected
+                    TotalNumItems = (bowlerteamid == null ?  context.Bowlers.Count() :
+                                    context.Bowlers.Where(x => x.TeamId == bowlerteamid).Count())
+                },
+
+                BowlerTeam = bowlerteam
+            });
         }
 
         public IActionResult Privacy()

@@ -19,20 +19,31 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a asp-action="Index" asp-controller="Home" asp-route-bowlerteamid="">Home</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <br />
+        @*Use Viewbag to display the current selected bowler team*@
+        @*This doesn't work' @Html.Raw(ViewBag.SelectedTeam*@
+        <h5 class="text-center">Current Selected Team: @ViewBag.SelectedTeam</h5>
+        <br /><br /><br />
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        <div class="row">
+
+            <div class="col-4">
+                <vc:bowler-team/>
+            </div>
+
+            <div class="col-8">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
