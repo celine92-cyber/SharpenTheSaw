@@ -4,6 +4,8 @@
 
 @model IndexViewModel
 
+ 
+<h5 class="text-center">Current Selected Team: @ViewBag.SelectedTeam</h5>
 <h3 class="text-center">Bowler Contact Information:</h3>
 
 <div class="text-center">
@@ -23,7 +25,7 @@
     }
 </div>
 
-    <div page-info="@Model.PageNumberingInfo" bowler-team="@Model.BowlerTeam"
-         page-url-bowlerteam="@Model.BowlerTeam">
+<div page-info="@Model.PageNumberingInfo" bowler-team="@Model.BowlerTeam"
+     page-url-bowlerteam="@Model.BowlerTeam">
 
-    </div>
+</div>

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,14 +29,15 @@
         <br />
         @*Use Viewbag to display the current selected bowler team*@
         @*This doesn't work' @Html.Raw(ViewBag.SelectedTeam*@
-        <h5 class="text-center">Current Selected Team: @ViewBag.SelectedTeam</h5>
+        @*<h5 class="text-center">Current Selected Team: @ViewBag.SelectedTeam</h5>*@
+        @*<h5 class="text-center">Current Selected Team: @ViewBag.SelectedTeam</h5>*@
         <br /><br /><br />
     </header>
     <div class="container">
         <div class="row">
 
             <div class="col-4">
-                <vc:bowler-team/>
+                <vc:bowler-team />
             </div>
 
             <div class="col-8">

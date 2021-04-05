@@ -22,9 +22,12 @@ namespace SharpenTheSaw.Controllers
             context = bl;
         }
 
+
         public IActionResult Index(long? bowlerteamid, string bowlerteam, int pageNum = 0)
         {
             int pageSize = 5;
+            //string dynamicTeamName = bowlerteam;
+            ViewBag.SelectedTeam = bowlerteam;
 
             return View(new IndexViewModel
 
@@ -35,6 +38,7 @@ namespace SharpenTheSaw.Controllers
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize)
                 .ToList()),
+                
 
                 PageNumberingInfo = new PageNumberingInfo
                 {
@@ -49,6 +53,8 @@ namespace SharpenTheSaw.Controllers
                 BowlerTeam = bowlerteam
             });
         }
+
+
 
         public IActionResult Privacy()
         {
